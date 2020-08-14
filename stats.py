@@ -1,13 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Thu Aug  6 13:32:31 2020
 
-@author: mikesingh
-"""
+''' Takes input of user location and returns statistics by Country, State, and County'''
 
-from statsCollector import statsResponseCountry, statsResponseState, statsResponseCounty
-from Location_Parse import abbrToName, verifyLocation
+from StatsCollector import statsResponseCountry, statsResponseState, statsResponseCounty
+from LocationParse import abbrToName, verifyLocation
 
 def maximumWords(county):
     wordsInCounty = county.split(" ")

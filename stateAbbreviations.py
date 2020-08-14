@@ -1,10 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Jul 24 04:49:22 2020
 
-@author: mikesingh
-"""
+'''Dictionary of State Abbreviates'''
 
 stateAbbr = {
     'Alabama': 'AL',

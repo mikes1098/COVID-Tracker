@@ -5,7 +5,7 @@
 
 
 from spellchecker import SpellChecker
-from stateAbbreviations import stateAbbr
+from StateAbbreviations import stateAbbr
 
 # Returns combinations of a string input
 def wordsCombination(county):

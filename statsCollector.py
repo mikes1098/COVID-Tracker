@@ -45,8 +45,8 @@ def main():
     country = "US"
     state = "New York"
     county = "Nassau"
-    #print(statsResponseCounty(state,county))
-    #print(statsResponseCountry(country))
-    #print(statsResponseState(state))
+    print(statsResponseCounty(state,county))
+    print(statsResponseCountry(country))
+    print(statsResponseState(state))
 
 #main()
