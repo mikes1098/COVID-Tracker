@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title> COVID Live Update Login </title>
+        <link rel = "stylesheet" href="../static/css/style.css">
+    </head>
+    <body>
+        <header>
+            <div class ="login-page">
+            <div class = "form">
+                <form action = "/registerAuth" method = "POST" class = "register-form" required>
+                    <input name="email" type = "email" placeholder = "Email" required>
+                    <input name="password" type = "password" placeholder = "Password" required minlength = "8">
+                    <input name="firstName" type = "text" placeholder = "First Name" required>
+                    <input name="lastName" type = "text" placeholder = "Last Name" required>
+                    <input name="phoneNumber" type = "tel" placeholder = "Phone Number (Optional)" minlength = "10">
+                    <button>Create</button>
+                    <p class = "message"> Already Registered? <a href= "#">Login</a> 
+                    </p>
+                </form>
+                <form action = "/loginAuth" method = "POST" class = "login-form">
+                    <input name = "email" id = "username" type="text" placeholder= "Email">
+                    <input name = "password" id = "password" type="password" placeholder= "Password">
+                    <button type = "submit">login</button>
+                    <p class ="message"> Not Registered? <a href ="#">Register</a></p>
+                    {% if error %}
+		                <p class="error"><strong>Error:</strong> {{error}}</p>
+	                {% endif %}
+                </form>
+            </div>
+            </div>
+
+            <script src="https://code.jquery.com/jquery-3.5.1.min.js">
+            </script>
+
+            <script>
+                $('.message a').click(function(){
+                $('form').animate({height: "toggle", opacity:"toggle"}, "slow");
+            });
+            </script>
+        </header>
+        <main>
+
+        </main>
+        <footer>
+
+        </footer>
+
+    </body>
+</html>
