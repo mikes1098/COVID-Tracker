@@ -20,8 +20,10 @@ conn = pymysql.connect(host='localhost',
 
 @app.route('/')
 def hello():
+    if 'username' in session:
+        return redirect(url_for('home'))
     return render_template('index.html')
-    
+
 @app.route('/loginAuth',methods=['GET', 'POST'])
 def loginAuth():
     email = request.form['email']
@@ -57,12 +59,32 @@ def registerAuth():
         cursor.close()
     return render_template("index.html")
 
-@app.route('/home')
+@app.route('/home',methods=['GET','POST'])
 def home():
-    emailU = session['email']
-    return render_template('home.html',email = emailU)
+    if 'username' in session:
+        emailU = session['email']
+        return render_template('home.html',email = emailU)
+    return render_template('/index.html')
 
+@app.route('/statistics', methods =['GET','POST'])
+def statistics():
+    if 'username' in session:
+        return render_template('/statistics.html')
+    return render_template('index.html')
 
+@app.route('/request', methods =['GET','POST'])
+def requests():
+    if 'username' in session:
+        return render_template('/request.html')
+    return render_template('index.html')
+
+@app.route('/about', methods =['GET','POST'])
+def about():
+    return render_template('/about.html')
+
+@app.route('/contact', methods =['GET','POST'])
+def contact():
+    return render_template('/contact.html')
 
 app.secret_key = 'some key that you will never guess'
 # Run the app on localhost port 5000

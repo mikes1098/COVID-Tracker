@@ -1,27 +1,92 @@
-body{
-    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url(save_7.png);
-    height: 100vh;
-    background-size:cover;
-    background-position: center;
+body { 
+    margin: 0;
+    background: rgb(209, 208, 208);
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
 }
 
-.login-page{
+.container {
+    width: 85%;
+    margin: 0 auto;
+}
+
+header {
+    background: #000080;
+    margin: 0 auto;
+}
+
+header::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.logo {
+    float: left;
+    padding: 10px 0;
+}
+
+nav {
+    float: inline-start;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav li {
+    display: inline-block;
+    margin-left: 90px;
+    padding-top: 30px;
+    position: relative;
+}
+
+nav a { 
+    color: #FFFFFF;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: rgb(209, 208, 208);
+}
+
+nav a::before {
+    content: '';
+    display: block;
+    height: 5px;
+    width: 100%;
+    background-color: #FFFFFF;
+    position: absolute;
+    top: 0;
+    width: 0%;
+    transition: all ease-in-out 250ms;
+}
+
+nav a:hover::before {
+    width: 100%
+}
+
+.login-page {
     width: 360px;
     padding: 10% 0 0;
     margin: auto;
 } 
 
-.form{
+.form {
     position: relative;
     z-index: 1;
-    background: rgba(7,40,195, 0.8);
+    background: #00008a;
     max-width: 360px;
     margin: 0 auto 100px;
     padding: 45px;
     text-align: center;
 }
 
-.form input{
+.form input {
     font-family: "Roboto", sans-serif;
     outline: 1;
     background: #f2f2f2;
@@ -33,7 +98,7 @@ body{
     font-size: size 14px;
 }
 
-.form button{
+.form button {
     font-family: "Roboto", sans-serif;
     text-transform: uppercase;
     outline: 0;
@@ -46,21 +111,21 @@ body{
     cursor: pointer;
 }
 
-.form button:hover,.form button:active{
+.form button:hover,.form button:active {
     background: #43A047
 }
 
-.form .message{
+.form .message {
     margin: 15px 0 0;
-    color: aliceblue;
+    color: rgb(236, 246, 255);
     font-size: 12px;
 }
 
-.form .message a{
+.form .message a {
     color: #4CAF50;
     text-decoration: none;
 }
 
-.form .register-form{
+.form .register-form {
     display:none;
 }

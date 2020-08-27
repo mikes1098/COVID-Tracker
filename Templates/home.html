@@ -3,17 +3,67 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title> foo </title>
+        <link rel="shortcut icon" href="../static/Images/titleLogo.png"/>
+        <link rel = "stylesheet" href="../static/css/style.css">
+        <title> Home </title>
     </head>
     <body>
 
         <header>
-        <h1>Hello! Welcome to COVID-Tracker!</h1>
-        <p>{{email}}</p>
-        </header>
-        <main>
+            <div class = "container">
 
+                <img src ="../static/Images/titleLogo.png" width = 75 height = 75 alt = "logo" class = "logo">
+
+                <nav>
+                    <ul>
+                        <li><a href = "/home">Home</a></li>
+                        <li><a href = "/statistics">Statistics</a></li>
+                        <li><a href = "/request">Request</a></li>
+                        <li><a href = "/contact">Contact</a></li>
+                        <li><a href = "/about">About</a></li>
+                    </ul>
+                </nav>
+
+            </div>
+        
+        </header>
+
+        <main>
+            <style type="text/css">
+                table, th, td{
+                    border: 1px solid black;
+                }
+            </style>
+            
+            Do you want to see General Statistics?
+            <a href="/statistics">Click Here</a>
+
+            <table>
+                <caption>COVID-19 Statistics History</caption>
+                <th>Request ID</th>
+                <th>Cases</th>
+                <th>Deaths</th>
+                <th>Time of Request</th>
+            
+            {% for line in posts %}
+                <tr>
+                    <td>{{line.requestID}}</td>
+                    <td>{{line.cases}}</td>
+                    <td>{{line.deaths}}</td>
+                    <td>{{line.timeRequest}}</td>
+                    
+                    <div></div>
+                    <div></div>
+            
+                <div></div>
+                <div></div>
+            
+                </tr>
+            {% endfor %}
+            </table>
+            
         </main>
+
         <footer>
 
         </footer>
