@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS Person(
     firstName VARCHAR(16),
     lastName VARCHAR(16),
     phoneNumber VARCHAR(11),
-    country VARCHAR(21),
+    country VARCHAR(36),
     state VARCHAR(3),
     PRIMARY KEY (email)
 );

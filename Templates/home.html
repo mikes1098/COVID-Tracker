@@ -17,6 +17,7 @@
                 <nav>
                     <ul>
                         <li><a href = "/home">Home</a></li>
+                        <li><a href = "/account">Account</a></li>
                         <li><a href = "/statistics">Statistics</a></li>
                         <li><a href = "/request">Request</a></li>
                         <li><a href = "/contact">Contact</a></li>
@@ -37,20 +38,26 @@
             
             Do you want to see General Statistics?
             <a href="/statistics">Click Here</a>
-
+            {% if countryStats %}
             <table>
-                <caption>COVID-19 Statistics History</caption>
-                <th>Request ID</th>
-                <th>Cases</th>
-                <th>Deaths</th>
-                <th>Time of Request</th>
+                <caption>COVID-19 Country Statistics</caption>
+                <th>Country</th>
+                <th>Cases Today</th>
+                <th>Recovered Today</th>
+                <th>Deaths Today</th>
+                <th>Total Cases</th>
+                <th>Total Recovered</th>
+                <th>Total Deaths</th>
+
             
-            {% for line in posts %}
                 <tr>
-                    <td>{{line.requestID}}</td>
-                    <td>{{line.cases}}</td>
-                    <td>{{line.deaths}}</td>
-                    <td>{{line.timeRequest}}</td>
+                    <td>{{countryStats.country}}</td>
+                    <td>{{countryStats.todayCases}}</td>
+                    <td>{{countryStats.todayRecovered}}</td>
+                    <td>{{countryStats.todayDeaths}}</td>
+                    <td>{{countryStats.cases}}</td>
+                    <td>{{countryStats.recovered}}</td>
+                    <td>{{countryStats.deaths}}</td>
                     
                     <div></div>
                     <div></div>
@@ -59,15 +66,44 @@
                 <div></div>
             
                 </tr>
-            {% endfor %}
-            </table>
             
+            </table>
+            {% endif %}
+            {% if stateStats %}
+            <table>
+                <caption>COVID-19 State Statistics</caption>
+                <th>State</th>
+                <th>Cases Today</th>
+                <th>Deaths Today</th>
+                <th>Total Cases</th>
+                <th>Total Recovered</th>
+                <th>Total Deaths</th>
+
+            
+                <tr>
+                    <td>{{stateStats.state}}</td>
+                    <td>{{stateStats.todayCases}}</td>
+                    <td>{{stateStats.todayDeaths}}</td>
+                    <td>{{stateStats.cases}}</td>
+                    <td>{{stateStats.recovered}}</td>
+                    <td>{{stateStats.deaths}}</td>
+                    
+                    <div></div>
+                    <div></div>
+            
+                <div></div>
+                <div></div>
+            
+                </tr>
+            </table>
+            {% endif %}
+
             <form action = "/logout" name = logout>
                 <button>Log Out</button>
             </form>
 
             {{email}}
-
+        
         </main>
 
         <footer>

@@ -3,6 +3,7 @@
 ''''Reports Statistics for specified locations'''
 
 import requests
+from stats.LocationParse import abbrToName, verifyLocation
 
 # Defines statistics for a specific county
 # Requires full name of state and county (abbreviations will not work)
@@ -25,9 +26,20 @@ def statsResponseCounty(state,county):
 #defines statistics for a specific state
 #Requires full name of state (abbreviations will not work)
 def statsResponseState(state):
-    page = "https://corona.lmao.ninja/v2/states/" + state + "?yesterday=false"
+    stateName = abbrToName(state)
+    page = "https://corona.lmao.ninja/v2/states/" + stateName + "?yesterday=false"
     response = requests.get(page)
     convJSON = response.json()
+    '''
+    newDict = {
+        "state": convJSON['state'],
+        "cases": convJSON['cases'],
+        "todayRecovered": convJSON["todayRecovered"],
+        "recovered": convJSON['recovered'],
+        "todayDeaths": convJSON['todayDeaths'],
+        "deaths": convJSON['deaths']
+    }
+    '''
     return convJSON
 
 #defines statistics for a specific country
@@ -39,14 +51,23 @@ def statsResponseCountry(country):
     #"message" is a default error message for an invalid country
     if "message" in convJSON:
         return convJSON["message"]
-    return convJSON
+    newDict = {
+        "country": convJSON['country'],
+        "todayCases": convJSON['todayCases'],
+        "cases": convJSON['cases'],
+        "todayRecovered": convJSON["todayRecovered"],
+        "recovered": convJSON['recovered'],
+        "todayDeaths": convJSON['todayDeaths'],
+        "deaths": convJSON['deaths']
+    }
+    return newDict
 
 def main():
     country = "US"
     state = "New York"
     county = "Nassau"
     print(statsResponseCounty(state,county))
-    print(statsResponseCountry(country))
+    print(statsResponseCountry("Trinidad and Tobago"))
     print(statsResponseState(state))
 
 #main()

@@ -5,6 +5,9 @@
 from flask import Flask, render_template, request, session, url_for, redirect
 import pymysql.cursors
 import hashlib
+from stats.StatsCollector import statsResponseState, statsResponseCounty, statsResponseCountry
+import sys
+
 
 # Initialize the app from Flask
 app = Flask(__name__)
@@ -35,8 +38,7 @@ def loginAuth():
     errorM = None
     if data:
         session['email'] = email
-        session['firstName'] = data['firstName']
-        return render_template('home.html')
+        return redirect(url_for('home'))
     else:
         errorM = "Email and Password combination does not exist. Please try again."
         return render_template("index.html",error = errorM)
@@ -54,7 +56,10 @@ def registerAuth():
     cursor = conn.cursor()
     cursor.execute(query,(email))
     data = cursor.fetchone()
+    print("HELLLOOOOOO " + state, flush = True)
     if data == None:
+        if state == "Definition":
+            state = None
         ins = "INSERT INTO Person VALUES(%s,%s,%s,%s,%s,%s,%s)"
         cursor.execute(ins, (email, password, firstName, lastName, phoneNumber,country,state))
         conn.commit()
@@ -64,12 +69,22 @@ def registerAuth():
 @app.route('/home',methods=['GET','POST'])
 def home():
     if 'email' in session:
-        emailU = session['email']
-        return render_template('home.html',email = emailU)
-    return render_template('index.html')
+        query = "SELECT country, state FROM Person where email = %s"
+        cursor = conn.cursor()
+        cursor.execute(query,(session['email']))
+        data = cursor.fetchone()
+        countryStat = statsResponseCountry(data['country'])
+        print(countryStat, flush=True)
+        stateStat = None
+        if data['state'] and data['country'] == "USA":
+            stateStat = statsResponseState(data['state'])
+            print(stateStat, flush=True)
+        return render_template('home.html',email = session['email'], countryStats = countryStat, stateStats = stateStat)
+    return redirect(url_for('hello'))
 
-
-
+@app.route('/account',methods = ['GET','POST'])
+def account():
+    return render_template('account.html')
 @app.route('/statistics', methods =['GET','POST'])
 def statistics():
     if 'email' in session:
@@ -82,19 +97,18 @@ def requests():
         return render_template('/request.html')
     return render_template('index.html')
 
-@app.route('/about', methods =['GET','POST'])
-def about():
-    return render_template('/about.html')
-
 @app.route('/contact', methods =['GET','POST'])
 def contact():
     return render_template('/contact.html')
+
+@app.route('/about', methods =['GET','POST'])
+def about():
+    return render_template('/about.html')
 
 @app.route('/logout', methods = ['GET','POST'])
 def logout():
     if session['email']:
         session.pop('email')
-        session.pop('firstName')
     return redirect(url_for('hello'))
 
 app.secret_key = 'some key that you will never guess'
