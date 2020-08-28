@@ -117,7 +117,7 @@ nav a:hover::before {
 
 .form .message {
     margin: 15px 0 0;
-    color: rgb(236, 246, 255);
+    color: aliceblue;
     font-size: 12px;
 }
 
@@ -128,4 +128,8 @@ nav a:hover::before {
 
 .form .register-form {
     display:none;
+}
+
+.register-form #state{
+    display:block;
 }
